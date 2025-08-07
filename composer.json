@@ -1,0 +1,36 @@
+{
+    "name": "xefi/phpstan-xefi-rules",
+    "type": "phpstan-extension",
+    "description": "Some custom PHPStan extensions for a better code base",
+    "license": "MIT",
+    "keywords": [
+        "phpstan",
+        "php",
+        "rules"
+    ],
+    "authors": [
+        {
+            "name": "Martin Soenen"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Xefi\\PHPStanRules\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Xefi\\PHPStanRules\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=8.0",
+        "phpstan/phpstan": "^2.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

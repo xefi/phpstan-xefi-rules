@@ -1,0 +1,9 @@
+rules:
+    - Xefi\PHPStanRules\Rules\BooleanPropertyNamingRule
+    - Xefi\PHPStanRules\Rules\MaxLinePerClassRule
+    - Xefi\PHPStanRules\Rules\MaxLinePerMethodRule
+    - Xefi\PHPStanRules\Rules\NoBasicExceptionRule
+    - Xefi\PHPStanRules\Rules\NoDeleteCascadeLaravel
+    - Xefi\PHPStanRules\Rules\NoGenericWordRule
+    - Xefi\PHPStanRules\Rules\NoLaravelObserverRule
+    - Xefi\PHPStanRules\Rules\NoTryCatchRule
