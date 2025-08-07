@@ -3,14 +3,14 @@
 [![CI state](https://img.shields.io/github/actions/workflow/status/xefi/phpstan-xefi-rules/tests.yml)](https://github.com/xefi/phpstan-xefi-rules)
 [![Packagist version](https://img.shields.io/packagist/v/xefi/phpstan-xefi-rules)](https://packagist.org/packages/xefi/phpstan-xefi-rules)
 
-> Some custom PHPStan extensions to improve the readability, maintainability and overall quality of your PHP code base.
+Some custom PHPStan extensions to improve the readability, maintainability and overall quality of your PHP code base.
 
-Package based on PHPStan. You can find the source package [here](https://phpstan.org/).
+> Package based on PHPStan. You can find the source package [here](https://phpstan.org/).
 
 ### Supported PHP versions
 | PHP version | This package version |
 |-------------|----------------------|
-| 7.4, 8.x    | Latest               |
+| 8.x         | Latest               |
 
 ## How to use it
 
@@ -26,6 +26,7 @@ composer require --dev "xefi/phpstan-xefi-rules"
 includes:
     - vendor/xefi/phpstan-xefi-rules/extension.neon
 
+# The rest of your config file
 parameters:
     paths:
         - src/
@@ -56,13 +57,13 @@ Ensure that a Boolean is always named with an “is” at the beginning of its n
 
 *Identifier : xefi.maxLinePerClass*
 
-Guarantee that a class is no more than 100 lines long, to clearly separate roles between classes and encourage clarification.
+Guarantee that a class is no more than 200 lines long, to clearly separate roles between classes and encourage clarification.
 
 ### Max Line Per Method Rule
 
 *Identifier : xefi.maxLinePerMethod*
 
-Guarantee that a method is no more than 20 lines long, to separate roles between classes and encourage specification.
+Guarantee that a method is no more than 40 lines long, to separate roles between classes and encourage specification.
 
 ### No Basic Exception Rule
 
