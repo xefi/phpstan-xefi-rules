@@ -11,6 +11,8 @@ use PHPStan\Rules\RuleErrorBuilder;
 class NoGenericWordRule implements Rule
 {
     private const FORBIDDEN_VARIABLE_NAMES = [
+        'arg',
+        'argument',
         'arr',
         'array',
         'bool',
