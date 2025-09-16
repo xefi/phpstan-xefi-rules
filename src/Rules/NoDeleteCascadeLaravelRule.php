@@ -10,7 +10,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Xefi\PHPStanRules\Visitors\CascadeDeleteVisitor;
 
-class NoDeleteCascadeLaravel implements Rule
+class NoDeleteCascadeLaravelRule implements Rule
 {
     public function getNodeType(): string
     {

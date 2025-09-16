@@ -2,18 +2,18 @@
 
 namespace Xefi\PHPStanRules\Tests\Rules;
 
-use Xefi\PHPStanRules\Rules\NoDeleteCascadeLaravel;
+use Xefi\PHPStanRules\Rules\NoDeleteCascadeLaravelRule;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 
 /**
- * @extends RuleTestCase<NoDeleteCascadeLaravel>
+ * @extends RuleTestCase<NoDeleteCascadeLaravelRule>
  */
 class NoDeleteCascadeLaravelRuleTest extends RuleTestCase
 {
     protected function getRule(): Rule
     {
-        return new NoDeleteCascadeLaravel();
+        return new NoDeleteCascadeLaravelRule();
     }
 
     public function testRuleDetectsCascade(): void
