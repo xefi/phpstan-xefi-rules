@@ -19,7 +19,7 @@ class NoLaravelObserverRuleTest extends RuleTestCase
     public function testRuleDumpAnExceptionInObserveFunction(): void
     {
         $this->analyse([__DIR__ . '/data/NoLaravelObserverRule/ObserveMethod.php'], [
-            ['The use of model Observers is forbidden in this project. Please use Event & Listeners instead.', 8]
+            ['Observers are forbidden because it can create technical debt. Please use Event & Listeners instead.', 8]
         ]);
     }
 
@@ -31,7 +31,7 @@ class NoLaravelObserverRuleTest extends RuleTestCase
     public function testRuleDumpAnExceptionInName(): void
     {
         $this->analyse([__DIR__ . '/data/NoLaravelObserverRule/TestObserver.php'], [
-            ['Observer classes or classes in the Observers namespace are forbidden in this project. Please use Event & Listeners instead.', 5]
+            ['Observers are forbidden because it can create technical debt. Please use Event & Listeners instead.', 5]
         ]);
     }
 
@@ -43,7 +43,7 @@ class NoLaravelObserverRuleTest extends RuleTestCase
     public function testRuleDumpAnExceptionInNamespace(): void
     {
         $this->analyse([__DIR__ . '/data/NoLaravelObserverRule/ObserversInNamespace.php'], [
-            ['Observer classes or classes in the Observers namespace are forbidden in this project. Please use Event & Listeners instead.', 5]
+            ['Observers are forbidden because it can create technical debt. Please use Event & Listeners instead.', 5]
         ]);
     }
 
@@ -55,7 +55,7 @@ class NoLaravelObserverRuleTest extends RuleTestCase
     public function testRuleDumpAnExceptionInAttribute(): void
     {
         $this->analyse([__DIR__ . '/data/NoLaravelObserverRule/ObservedByAttribute.php'], [
-            ['The use of the ObservedBy attribute is forbidden in this project. Please use Event & Listeners instead.', 5]
+            ['Observers are forbidden because it can create technical debt. Please use Event & Listeners instead.', 5]
         ]);
     }
 
