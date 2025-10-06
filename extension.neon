@@ -1,4 +1,5 @@
 rules:
+    - Xefi\PHPStanRules\Rules\BannedFunctionsRule
     - Xefi\PHPStanRules\Rules\BooleanPropertyNamingRule
     - Xefi\PHPStanRules\Rules\MaxLinePerClassRule
     - Xefi\PHPStanRules\Rules\MaxLinePerMethodRule

@@ -47,6 +47,12 @@ For all available options, please take a look at the PHPStan documentation: **ht
 
 ## Rules
 
+### Banned Functions Rule
+
+*Identifier : xefi.bannedFunctions*
+
+Ensure banned functions like `dd()` are not called.
+
 ### Boolean Property Naming Rule
 
 *Identifier : xefi.booleanPropertyNaming*
