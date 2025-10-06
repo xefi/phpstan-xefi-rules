@@ -21,7 +21,6 @@ class NoBasicExceptionRule implements Rule
             if ($exceptionClass instanceof Node\Name && $exceptionClass->toString() === 'Exception') {
                 return [
                     RuleErrorBuilder::message('Basic exceptions are not allowed. Please create a custom Exception instead.')
-                        ->line($node->getLine())
                         ->identifier('xefi.noBasicException')
                         ->build()
                 ];

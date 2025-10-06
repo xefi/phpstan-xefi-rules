@@ -25,7 +25,6 @@ class BooleanPropertyNamingRule implements Rule
 
             if ($propertyType === "bool" && substr($propertyName, 0, 2 ) !== "is") {
                 $errors[] = RuleErrorBuilder::message('A boolean property should start with "is".')
-                    ->line($node->getLine())
                     ->identifier('xefi.booleanPropertyNaming')
                     ->build();
             }

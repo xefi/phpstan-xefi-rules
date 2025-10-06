@@ -19,7 +19,6 @@ class NoTryCatchRule implements Rule
     {
         return [
             RuleErrorBuilder::message("Try-catch's are forbidden. Please use Exceptions instead.")
-                ->line($node->getLine())
                 ->identifier('xefi.noTryCatch')
                 ->build(),
         ];

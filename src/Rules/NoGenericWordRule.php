@@ -64,7 +64,6 @@ class NoGenericWordRule implements Rule
                         $varName
                     )
                 )
-                ->line($node->getLine())
                 ->identifier('xefi.noGenericWord')
                 ->build()
             ];

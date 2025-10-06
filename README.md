@@ -57,7 +57,7 @@ Ensure banned functions like `dd()` are not called.
 
 *Identifier : xefi.booleanPropertyNaming*
 
-Ensure that a Boolean is always named with an “is” at the beginning of its name, to clarify the condition it represents.
+Ensure that a Boolean is always named with an `is` at the beginning of its name, to clarify the condition it represents.
 
 ### Max Line Per Class Rule
 

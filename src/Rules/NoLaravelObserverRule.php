@@ -34,7 +34,6 @@ class NoLaravelObserverRule implements Rule
     {
         if ($node instanceof Node\Expr\StaticCall && $node->name?->toString() === 'observe') {
             $errors[] = RuleErrorBuilder::message('Observers are forbidden because it can create technical debt. Please use Event & Listeners instead.')
-                ->line($node->getLine())
                 ->identifier(self::$ruleIdentifier)
                 ->build();
         }
@@ -48,7 +47,6 @@ class NoLaravelObserverRule implements Rule
 
             if (str_ends_with($className, 'Observer') || str_contains($namespace, 'Observers')) {
                 $errors[] = RuleErrorBuilder::message('Observers are forbidden because it can create technical debt. Please use Event & Listeners instead.')
-                    ->line($node->getLine())
                     ->identifier(self::$ruleIdentifier)
                     ->build();
             }
@@ -62,7 +60,6 @@ class NoLaravelObserverRule implements Rule
                 foreach ($attrGroup->attrs as $attr) {
                     if ($attr->name->getParts() !== null && in_array('ObservedBy', $attr->name->getParts(), true)) {
                         $errors[] = RuleErrorBuilder::message('Observers are forbidden because it can create technical debt. Please use Event & Listeners instead.')
-                            ->line($node->getLine())
                             ->identifier(self::$ruleIdentifier)
                             ->build();
                         break 2;

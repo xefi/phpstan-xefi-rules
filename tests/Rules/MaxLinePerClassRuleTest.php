@@ -23,7 +23,8 @@ class MaxLinePerClassRuleTest extends RuleTestCase
         // each error consists of the asserted error message, and the asserted error file line
         $this->analyse([__DIR__ . '/data/MaxLinePerClassRule/TwoHundredLinesClass.php'], [
             [
-                "The TwoHundredLinesClass class has more than 200 code lines. Please reduce it. The recommended class length is 100 lines.", // asserted error message
+                "The TwoHundredLinesClass class has more than 200 code lines. Please reduce it.
+    💡 The recommended class length is 100 lines.", // asserted error message
                 5, // asserted error line
             ],
         ]);

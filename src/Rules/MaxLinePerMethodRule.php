@@ -28,13 +28,17 @@ class MaxLinePerMethodRule implements Rule
             return [
                 RuleErrorBuilder::message(
                     sprintf(
-                        'The %s function has more than %d code lines. Please reduce it. The recommended method length is %d lines.',
+                        'The %s function has more than %d code lines. Please reduce it.',
                         $node->name->toString(),
-                        self::MAX_LINES,
+                        self::MAX_LINES
+                    )
+                )
+                ->tip(
+                    sprintf(
+                        'The recommended method length is %d lines.',
                         self::RECOMMENDED_LINES
                     )
                 )
-                ->line($node->getLine())
                 ->identifier('xefi.maxLinePerMethod')
                 ->build(),
             ];

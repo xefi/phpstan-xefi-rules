@@ -28,13 +28,17 @@ class MaxLinePerClassRule implements Rule
             return [
                 RuleErrorBuilder::message(
                     sprintf(
-                        'The %s class has more than %d code lines. Please reduce it. The recommended class length is %d lines.',
+                        'The %s class has more than %d code lines. Please reduce it.',
                         $node->name->toString(),
-                        self::MAX_LINES,
+                        self::MAX_LINES
+                    )
+                )
+                ->tip(
+                    sprintf(
+                        'The recommended class length is %d lines.',
                         self::RECOMMENDED_LINES
                     )
                 )
-                ->line($node->getLine())
                 ->identifier('xefi.maxLinePerClass')
                 ->build(),
             ];

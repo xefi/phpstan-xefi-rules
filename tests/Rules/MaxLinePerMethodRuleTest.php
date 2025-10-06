@@ -23,7 +23,8 @@ class MaxLinePerMethodRuleTest extends RuleTestCase
         // each error consists of the asserted error message, and the asserted error file line
         $this->analyse([__DIR__ . '/data/MaxLinePerMethodRule/MultipleLinesMethods.php'], [
             [
-                "The fortyOneLines function has more than 40 code lines. Please reduce it. The recommended method length is 20 lines.", // asserted error message
+                "The fortyOneLines function has more than 40 code lines. Please reduce it.
+    💡 The recommended method length is 20 lines.", // asserted error message
                 93, // asserted error line
             ],
         ]);
