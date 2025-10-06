@@ -32,7 +32,7 @@ class NoLaravelObserverRule implements Rule
 
     protected function checkObserveMethod(array &$errors, Node $node) : void
     {
-        if ($node instanceof Node\Expr\StaticCall && $node->name->toString() === 'observe') {
+        if ($node instanceof Node\Expr\StaticCall && $node->name?->toString() === 'observe') {
             $errors[] = RuleErrorBuilder::message('Observers are forbidden because it can create technical debt. Please use Event & Listeners instead.')
                 ->line($node->getLine())
                 ->identifier(self::$ruleIdentifier)
