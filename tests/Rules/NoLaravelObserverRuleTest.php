@@ -63,4 +63,23 @@ class NoLaravelObserverRuleTest extends RuleTestCase
     {
         $this->analyse([__DIR__ . '/data/NoLaravelObserverRule/NoObservedByAttribute.php'], []);
     }
+    public function testDynamicStaticCallDoesNotCrash(): void
+    {
+        $this->analyse([__DIR__ . '/data/NoLaravelObserverRule/DynamicObserveCall.php'], []);
+    }
+
+    public function testAnonymousClassDoesNotCrash(): void
+    {
+        $this->analyse([__DIR__ . '/data/NoLaravelObserverRule/AnonymousClass.php'], []);
+    }
+
+    public function testStaticObserveCallIsStillDetected(): void
+    {
+        $this->analyse([__DIR__ . '/data/NoLaravelObserverRule/StaticObserveCall.php'], [
+            [
+                'Observers are forbidden because it can create technical debt. Please use Event & Listeners instead.',
+                8,
+            ],
+        ]);
+    }
 }

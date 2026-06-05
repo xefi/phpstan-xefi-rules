@@ -30,26 +30,44 @@ class NoLaravelObserverRule implements Rule
         return $errors;
     }
 
-    protected function checkObserveMethod(array &$errors, Node $node) : void
+    protected function checkObserveMethod(array &$errors, Node $node): void
     {
-        if ($node instanceof Node\Expr\StaticCall && $node->name?->toString() === 'observe') {
+        if (! $node instanceof Node\Expr\StaticCall) {
+            return;
+        }
+
+        if ($this->resolveCallName($node) === 'observe') {
             $errors[] = RuleErrorBuilder::message('Observers are forbidden because it can create technical debt. Please use Event & Listeners instead.')
                 ->identifier(self::$ruleIdentifier)
                 ->build();
         }
     }
 
+    private function resolveCallName(Node $node): ?string
+    {
+        $name = match (true) {
+            $node instanceof Node\Expr\StaticCall,
+                $node instanceof Node\Expr\MethodCall,
+                $node instanceof Node\Expr\NullsafeMethodCall => $node->name,
+            default => null,
+        };
+
+        return $name instanceof Node\Identifier ? $name->toString() : null;
+    }
+
     protected function checkClassesAndNamespaces(array &$errors, Node $node, Scope $scope) : void
     {
-        if ($node instanceof Node\Stmt\Class_) {
-            $className = $node->name->toString();
-            $namespace = $scope->getNamespace();
+        if (! $node instanceof Node\Stmt\Class_) {
+            return;
+        }
 
-            if (str_ends_with($className, 'Observer') || str_contains($namespace, 'Observers')) {
-                $errors[] = RuleErrorBuilder::message('Observers are forbidden because it can create technical debt. Please use Event & Listeners instead.')
-                    ->identifier(self::$ruleIdentifier)
-                    ->build();
-            }
+        $className = $node->name?->toString() ?? '';
+        $namespace = $scope->getNamespace() ?? '';
+
+        if (str_ends_with($className, 'Observer') || str_contains($namespace, 'Observers')) {
+            $errors[] = RuleErrorBuilder::message('Observers are forbidden because it can create technical debt. Please use Event & Listeners instead.')
+                ->identifier(self::$ruleIdentifier)
+                ->build();
         }
     }
 

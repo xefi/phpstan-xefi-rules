@@ -20,6 +20,10 @@ class MaxLinePerClassRule implements Rule
 
     public function processNode(Node $node, Scope $scope): array
     {
+        if ($node->name === null) {
+            return [];
+        }
+
         $startLine = $node->getStartLine() + 1;
         $endLine = $node->getEndLine() - 1;
         $lineCount = $endLine - $startLine;
@@ -33,14 +37,14 @@ class MaxLinePerClassRule implements Rule
                         self::MAX_LINES
                     )
                 )
-                ->tip(
-                    sprintf(
-                        'The recommended class length is %d lines.',
-                        self::RECOMMENDED_LINES
+                    ->tip(
+                        sprintf(
+                            'The recommended class length is %d lines.',
+                            self::RECOMMENDED_LINES
+                        )
                     )
-                )
-                ->identifier('xefi.maxLinePerClass')
-                ->build(),
+                    ->identifier('xefi.maxLinePerClass')
+                    ->build(),
             ];
         }
 
