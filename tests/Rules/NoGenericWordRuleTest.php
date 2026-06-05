@@ -20,7 +20,7 @@ class NoGenericWordRuleTest extends RuleTestCase
     {
         // first argument: path to the example file that contains some errors that should be reported by MyRule
         // second argument: an array of expected errors,
-        // each error consists of the asserted error message, and the asserted error file line
+        // each error consists of the asserted error message, and the asserted error line
         $this->analyse([__DIR__ . '/data/NoGenericWordRule/BadVariablesClass.php'], [
             [
                 "Variable name \"array\" is too generic. Please use a more descriptive name.", // asserted error message
@@ -45,5 +45,19 @@ class NoGenericWordRuleTest extends RuleTestCase
     public function testRuleDoesNotHandleProperties(): void
     {
         $this->analyse([__DIR__ . '/data/NoGenericWordRule/PropertiesNotHandledClass.php'], []);
+    }
+
+    public function testRuleIsCaseInsensitive(): void
+    {
+        $this->analyse([__DIR__ . '/data/NoGenericWordRule/MixedCaseVariablesClass.php'], [
+            [
+                "Variable name \"Data\" is too generic. Please use a more descriptive name.",
+                8,
+            ],
+            [
+                "Variable name \"Result\" is too generic. Please use a more descriptive name.",
+                9,
+            ],
+        ]);
     }
 }

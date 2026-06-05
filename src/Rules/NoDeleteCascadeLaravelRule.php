@@ -19,21 +19,23 @@ class NoDeleteCascadeLaravelRule implements Rule
 
     public function processNode(Node $node, Scope $scope): array
     {
-        $errors = [];
+        if ($node->extends?->toString() !== 'Illuminate\Database\Migrations\Migration') {
+            return [];
+        }
+
         $cascadeDeletes = [];
 
-        foreach ($node->extends as $extend) {
-            if ($extend === 'Illuminate\Database\Migrations\Migration') {
-                foreach ($node->getMethods() as $method) {
-                    if (in_array($method->name, ['up', 'down'])) {
-                        $visitor = new CascadeDeleteVisitor($cascadeDeletes);
-                        $traverser = new NodeTraverser;
-                        $traverser->addVisitor($visitor);
-                        $traverser->traverse([$method]);
-                    }
-                }
+        foreach ($node->getMethods() as $method) {
+            if (! in_array($method->name->toString(), ['up', 'down'], true)) {
+                continue;
             }
+
+            $traverser = new NodeTraverser();
+            $traverser->addVisitor(new CascadeDeleteVisitor($cascadeDeletes));
+            $traverser->traverse([$method]);
         }
+
+        $errors = [];
 
         foreach ($cascadeDeletes as $cascadeDelete) {
             $errors[] = RuleErrorBuilder::message("Cascade delete detected in migration. Please do not delete cascade on the database. Handle it in the code instead.")

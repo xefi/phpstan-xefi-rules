@@ -56,19 +56,24 @@ class NoGenericWordRule implements Rule
     public function processNode(Node $node, Scope $scope): array
     {
         $varName = $node->name;
-        if (in_array($varName, self::FORBIDDEN_VARIABLE_NAMES)) {
-            return [
-                RuleErrorBuilder::message(
-                    sprintf(
-                        'Variable name "%s" is too generic. Please use a more descriptive name.',
-                        $varName
-                    )
-                )
-                ->identifier('xefi.noGenericWord')
-                ->build()
-            ];
+
+        if (! is_string($varName)) {
+            return [];
         }
 
-        return [];
+        if (! in_array(strtolower($varName), self::FORBIDDEN_VARIABLE_NAMES, true)) {
+            return [];
+        }
+
+        return [
+            RuleErrorBuilder::message(
+                sprintf(
+                    'Variable name "%s" is too generic. Please use a more descriptive name.',
+                    $varName
+                )
+            )
+            ->identifier('xefi.noGenericWord')
+            ->build()
+        ];
     }
 }
