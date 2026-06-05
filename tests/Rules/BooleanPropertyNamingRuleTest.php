@@ -27,4 +27,12 @@ class BooleanPropertyNamingRuleTest extends RuleTestCase
     {
         $this->analyse([__DIR__ . '/data/BooleanPropertyNamingRule/BooleanWellNamedClass.php'], []);
     }
+
+    public function testRuleDetectsNullableAndUnionBooleans(): void
+    {
+        $this->analyse([__DIR__ . '/data/BooleanPropertyNamingRule/NullableBooleanClass.php'], [
+            ['A boolean property should start with "is".', 7],
+            ['A boolean property should start with "is".', 8],
+        ]);
+    }
 }

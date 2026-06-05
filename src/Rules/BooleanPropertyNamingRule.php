@@ -6,7 +6,6 @@ use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\Type\BooleanType;
 
 class BooleanPropertyNamingRule implements Rule
 {
@@ -17,13 +16,14 @@ class BooleanPropertyNamingRule implements Rule
 
     public function processNode(Node $node, Scope $scope): array
     {
+        if (! $this->isBooleanType($node->type)) {
+            return [];
+        }
+
         $errors = [];
 
         foreach ($node->props as $prop) {
-            $propertyName = $prop->name->name;
-            $propertyType = $node->type->name;
-
-            if ($propertyType === "bool" && substr($propertyName, 0, 2 ) !== "is") {
+            if (! str_starts_with($prop->name->name, 'is')) {
                 $errors[] = RuleErrorBuilder::message('A boolean property should start with "is".')
                     ->identifier('xefi.booleanPropertyNaming')
                     ->build();
@@ -31,5 +31,26 @@ class BooleanPropertyNamingRule implements Rule
         }
 
         return $errors;
+    }
+
+    private function isBooleanType(?Node $type): bool
+    {
+        if ($type instanceof Node\Identifier) {
+            return strtolower($type->name) === 'bool';
+        }
+
+        if ($type instanceof Node\NullableType) {
+            return $this->isBooleanType($type->type);
+        }
+
+        if ($type instanceof Node\UnionType || $type instanceof Node\IntersectionType) {
+            foreach ($type->types as $innerType) {
+                if ($this->isBooleanType($innerType)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

@@ -34,4 +34,11 @@ class NoDeleteCascadeLaravelRuleTest extends RuleTestCase
     {
         $this->analyse([__DIR__ . '/data/NoDeleteCascadeLaravelRule/NotALaravelMigration.php'], []);
     }
+
+    public function testRuleDetectsCascadeOnDeleteShorthand(): void
+    {
+        $this->analyse([__DIR__ . '/data/NoDeleteCascadeLaravelRule/CascadeShorthandMigration.php'], [
+            ['Cascade delete detected in migration. Please do not delete cascade on the database. Handle it in the code instead.', 12],
+        ]);
+    }
 }
