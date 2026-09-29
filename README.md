@@ -71,6 +71,16 @@ Guarantee that a class is no more than 200 lines long, to clearly separate roles
 
 Guarantee that a method is no more than 40 lines long, to separate roles between classes and encourage specification.
 
+### No Bag Name Rule
+
+*Identifier : xefi.noBagName*
+
+Forbid bag names — words that name nothing and attract unrelated code. A class, interface, trait or enum may not end in `Service`, `Repository`, `Manager`, `Helper`, `Handler`, `Util` or `Utility`, singular or plural, nor be declared in a namespace with a `Services`, `Repositories`, `Managers`, `Helpers`, `Handlers`, `Utils`, `Utilities`, `Support`, `Common` or `Misc` segment. A well-named class in a `Services` namespace is still in a bag: the folder attracts classes the way the suffix attracts methods.
+
+A suffix is allowed only when a third-party class or interface that the declaration directly extends or implements ends in the same word, a trailing `Interface` aside: `RefusingDatabaseManager extends MySQLDatabaseManager`, `DatabaseSessionHandler implements SessionHandlerInterface`. A `*ServiceProvider` ends in `Provider` and is never reported.
+
+To adopt the rule in a code base that already has bags, generate a baseline (`vendor/bin/phpstan analyse --generate-baseline`): the existing offences stay listed, any new one fails, and an entry left behind once its bag is dissolved is reported as unmatched.
+
 ### No Basic Exception Rule
 
 *Identifier : xefi.noBasicException*

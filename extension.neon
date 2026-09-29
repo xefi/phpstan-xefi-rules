@@ -3,6 +3,7 @@ rules:
     - Xefi\PHPStanRules\Rules\BooleanPropertyNamingRule
     - Xefi\PHPStanRules\Rules\MaxLinePerClassRule
     - Xefi\PHPStanRules\Rules\MaxLinePerMethodRule
+    - Xefi\PHPStanRules\Rules\NoBagNameRule
     - Xefi\PHPStanRules\Rules\NoBasicExceptionRule
     - Xefi\PHPStanRules\Rules\NoDeleteCascadeLaravelRule
     - Xefi\PHPStanRules\Rules\NoGenericWordRule
